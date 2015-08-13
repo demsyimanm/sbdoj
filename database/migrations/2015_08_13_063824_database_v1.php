@@ -24,12 +24,23 @@ class DatabaseV1 extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Schema::create('events', function (Blueprint $table) {
+         
+         Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('username');
+            $table->string('password');
+            $table->string('level')->nullable();
+            $table->rememberToken();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+         Schema::create('events', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('admins_id');
             $table->string('nama')->nullable();
             $table->string('konten')->nullable();
-            $table->dateTime('waku_mulai')->nullable();
+            $table->dateTime('waktu_mulai')->nullable();
             $table->dateTime('waktu_akhir')->nullable();
             $table->string('kelas')->nullable();
             $table->softDeletes();
@@ -38,19 +49,10 @@ class DatabaseV1 extends Migration
 
          Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('event_id');
+            $table->string('events_id');
             $table->string('konten')->nullable();
             $table->string('jawaban')->nullable();
             $table->dateTime('waktu');
-            $table->softDeletes();
-            $table->timestamps();
-        });
-         
-         Schema::create('admins', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('username');
-            $table->string('password');
-            $table->string('level')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

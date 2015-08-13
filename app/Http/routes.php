@@ -12,8 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('pages.login');
+    return view('AdminPages.login');
 });
 
-Route::get('login','HomeController@login');
-Route::get('index','HomeController@index');
+Route::get('admin','AdminController@login');
+Route::post('admin',array('before' => 'csrf', 'uses' => 'AdminController@login'));
+Route::get('logout','AdminController@logout');

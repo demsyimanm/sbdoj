@@ -5,22 +5,22 @@ namespace App\Http\Controllers;
 use Request;
 use Auth;
 use Input;
-use App\Models\User;
+use App\Models\AdminModel;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
 	protected $data = array();
-    /*public function index()
+    public function index()
     {	
         $this->data['username'] = "";
         $this->data['password'] = "";
         if(Auth::check())
         {
-            $this->data['username'] = Auth::user()->username;
-            $this->data['password'] = Auth::user()->password;
+            $this->data['username'] = Auth::admins()->username;
+            $this->data['password'] = Auth::admins()->password;
         }
-        return view('pages.home',$this->data);
-    }*/
+        return view('AdminPages.index',$this->data);
+    }
 
     public function login()
     {
@@ -30,31 +30,34 @@ class HomeController extends Controller
             $this->data['username'] = Input::get('username');
             if (Auth::attempt($credentials,true))
             {
-                return view('pages.home',$this->data);
+                //return view('AdminPages.index',$this->data);
+
+                dd('asdadsd');
             }
 
-            return view('pages.login');
+            //return view('AdminPages.login');
+            dd('asdadsd_agagl');
     	}
 
     	else if (Request::isMethod('get'))
     	{
             if (Auth::check())
             {
-                return view('pages.home');
+                return view('AdminPages.index');
             }
 
-    		return view('pages.login');
+    		return view('AdminPages.login');
     	}
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('pages.login');
+        return redirect('AdminPages.login');
     }
 
-    public function index()
+    /*public function index()
     {
         return view ('pages.index');
-    }
+    }*/
 }
