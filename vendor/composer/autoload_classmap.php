@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
-    'DatabaseV1' => $baseDir . '/database/migrations/databaseV1.php',
+    'DatabaseV1' => $baseDir . '/database/migrations/2015_08_13_063824_database_v1.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',

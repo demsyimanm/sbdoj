@@ -25,25 +25,45 @@ class DatabaseV1 extends Migration
             $table->timestamps();
         });
 
-        Schema::create('question', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('judul')->unique();
-            $table->string('konten',1000);
-            $table->dateTime('waktu');
-            $table->string('key_id');
+            $table->string('nama')->nullable();
+            $table->string('konten')->nullable();
+            $table->dateTime('waku_mulai')->nullable();
+            $table->dateTime('waktu_akhir')->nullable();
+            $table->string('kelas')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
 
-         Schema::create('comment', function (Blueprint $table) {
+         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('post_id');
-            $table->string('user_id');
-            $table->string('konten',1000);
+            $table->string('event_id');
+            $table->string('konten')->nullable();
+            $table->string('jawaban')->nullable();
             $table->dateTime('waktu');
             $table->softDeletes();
             $table->timestamps();
         });
+         
+         Schema::create('admins', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('username');
+            $table->string('password');
+            $table->string('level')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+         Schema::create('submissions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('questions_id');
+            $table->integer('users_id');
+            $table->integer('nilai')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -53,8 +73,11 @@ class DatabaseV1 extends Migration
      */
     public function down()
     {
-        Schema::drop('user');
-        Schema::drop('post');
-        Schema::drop('comment');
+        Schema::drop('users');
+        Schema::drop('admins');
+        Schema::drop('questions');
+        Schema::drop('events');
+        Schema::drop('submissions');
+
     }
 }
