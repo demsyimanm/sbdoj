@@ -10,14 +10,13 @@ class EventModel extends Model
 {
 	use SoftDeletes;
 
-	protected $table = 'events';
+	protected $table = 'event';
 	protected $primaryKey = 'id';
 	public $timestamps = true;
 	public $incrementing = true;
 
 	protected $fillable = array(
-		'admins_id',
-		'nama',
+		'judul',
 		'konten',
 		'waktu_mulai',
 		'waktu_akhir',
@@ -27,12 +26,7 @@ class EventModel extends Model
 	protected $SoftDelete = true;
 	protected $dates = ['deleted_at'];
 
-	public function admin()
-	{
-		return $this->belongsTo('App\Models\AdminModel');
-	}
-
-	public function questions()
+	public function question()
 	{
 		return $this->hasMany('App\Models\QuestionModel');
 	}

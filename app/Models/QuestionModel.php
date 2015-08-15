@@ -10,15 +10,16 @@ class QuestionModel extends Model
 {
 	use SoftDeletes;
 
-	protected $table = 'questions';
+	protected $table = 'question';
 	protected $primaryKey = 'id';
 	public $timestamps = true;
 	public $incrementing = true;
 
 	protected $fillable = array(
-		'events_id',
+		'event_id',
+		'judul',
 		'konten',
-		'jawaban',
+		'jawaban'
 		'waktu',
 	);
 
@@ -27,12 +28,12 @@ class QuestionModel extends Model
 
 	public function event()
 	{
-		return $this->belongsTo('App\Models\EventAdmin');
+		return $this->belongsTo('App\Models\EventModel');
 	}
 
-	public function users()
+	public function submission()
 	{
-		return $this->belongsToMany('App\Models\UserModel','submissions', 'questions_id', 'users_id');
+		return $this->hasMany('App\Models\SubmissionModel');
 	}
 
 	

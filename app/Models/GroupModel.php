@@ -2,36 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SubmissionModel extends Model
+class GroupModel extends Model
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
-	protected $table = 'submissions';
+	protected $table = 'group';
 	protected $primaryKey = 'id';
 	public $timestamps = true;
 	public $incrementing = true;
 
 	protected $fillable = array(
-		'questions_id',
-		'users_id',
-		'nilai',
-		'jawaban',
+		'nama',
 	);
 
 	protected $SoftDelete = true;
 	protected $dates = ['deleted_at'];
 
-	public function question()
-	{
-		return $this->belongsTo('App\Models\QuestionModel');
-	}
-
 	public function user()
 	{
 		return $this->hasMany('App\Models\UserModel');
-	}	
+	}
 }

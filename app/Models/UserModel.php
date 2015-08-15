@@ -22,14 +22,20 @@ class UserModel extends Model implements AuthenticatableContract
 		'nama',
 		'kelas',
 		'password',
+		'group_id',
 	);
 
 	protected $SoftDelete = true;
 	protected $dates = ['deleted_at'];
 
-	public function questions()
+	public function submission()
 	{
-		return $this->belongsToMany('App\Models\QuestionModel','submission', 'users_id', 'questions_id');
+		return $this->belongsTo('App\Models\SubmissionModel');
+	}
+
+	public function group()
+	{
+		return $this->belongsTo('App\Models\GroupModel');
 	}
 
 	public function getAuthIdentifier()
